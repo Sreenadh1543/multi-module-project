@@ -1,0 +1,48 @@
+pipeline {
+    agent any
+    stages {
+
+        stage('Build project') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+
+        stage('create a new branch') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+         stage('Check out new branch') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Modernaize project') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Validate Build') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+
+        stage('Check server start up') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Merge to main branch') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+        stage('Clean up') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
