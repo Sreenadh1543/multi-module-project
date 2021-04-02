@@ -5,13 +5,13 @@
     <parent>
         <artifactId>java-multi-modules</artifactId>
         <groupId>com.mkyong.multi</groupId>
-        <version>1.0</version>
+        <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.mkyong.password</groupId>
     <artifactId>password-sha</artifactId>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <properties>

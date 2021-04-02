@@ -7,10 +7,9 @@
     <groupId>com.mkyong.multi</groupId>
     <artifactId>java-multi-modules</artifactId>
     <packaging>pom</packaging>
-    <version>1.0</version>
+    <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- https://maven.apache.org/general.html#encoding-warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
