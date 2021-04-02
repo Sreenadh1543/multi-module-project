@@ -1,5 +1,10 @@
 #!groovy
 node("master") {
+       tools {
+            maven 'MAVEN_HOME'
+            jdk 'JAVA_HOME'
+            git 'GIT_HOME'
+        }
 
         stage('Build project') {
                sh 'mvn clean install'
