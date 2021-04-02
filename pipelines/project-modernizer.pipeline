@@ -1,26 +1,16 @@
-#!groovy
 node("master") {
-       tools {
-            maven 'MAVEN_HOME'
-            jdk 'JAVA_HOME'
-            git 'GIT_HOME'
-        }
 
         stage('Build project') {
-               sh 'mvn clean install'
+               bat 'mvn clean install'
         }
 
-        stage('Checkout') {
-            script {
-               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GITHUB_PERSONAL',
-               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                       bat git config --get remote.origin.url
-                       bat git config --global user.name "sreenadh1543"
-                       bat git config --global user.email "sreenadh1543@gmail.com"
-              }
+        stage('Initialize') {
+               bat 'git config --global user.name "sreenadh1543"'
+               bat 'git config --global user.email "sreenadh1543@gmail.com"'
         }
 
         stage('create a new branch') {
+              bat 'git branch -D framework_Upgrade'
               bat 'git branch framework_Upgrade'
         }
 
@@ -28,14 +18,15 @@ node("master") {
               bat 'git checkout framework_Upgrade'
          }
 
+
+        stage('Modernize project') {
+                echo 'Hello World'
+        }
+
          stage('Push framework upgraded branch to remote') {
             bat 'git add .'
             bat 'git commit -m "Framework modernized and jars upgraded"'
             bat 'git push'
-        }
-
-        stage('Modernize project') {
-                echo 'Hello World'
         }
 
         stage('Validate Build') {
@@ -46,13 +37,11 @@ node("master") {
                 echo 'Hello World'
         }
 
-
         stage('Merge to main branch') {
                 echo 'Hello World'
         }
+
         stage('Clean up') {
                 echo 'Hello World'
         }
-}
-
 }
