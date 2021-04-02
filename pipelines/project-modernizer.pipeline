@@ -1,16 +1,8 @@
 #!groovy
-node {
-    agent any
-     tools {
-            maven 'MAVEN_HOME'
-            jdk 'JAVA_HOME'
-            git 'GIT_HOME'
-        }
+node("master") {
 
         stage('Build project') {
-            steps {
                sh 'mvn clean install'
-             }
         }
 
         stage('Checkout') {
@@ -23,37 +15,37 @@ node {
               }
         }
 
-            stage('create a new branch') {
-                  bat 'git branch framework_Upgrade'
-            }
+        stage('create a new branch') {
+              bat 'git branch framework_Upgrade'
+        }
 
-             stage('Check out new branch') {
-                  bat 'git checkout framework_Upgrade'
-             }
+         stage('Check out new branch') {
+              bat 'git checkout framework_Upgrade'
+         }
 
-             stage('Push framework upgraded branch to remote') {
-                bat 'git add .'
-                bat 'git commit -m "Framework modernized and jars upgraded"'
-                bat 'git push'
-            }
+         stage('Push framework upgraded branch to remote') {
+            bat 'git add .'
+            bat 'git commit -m "Framework modernized and jars upgraded"'
+            bat 'git push'
+        }
 
-            stage('Modernize project') {
-                    echo 'Hello World'
-            }
+        stage('Modernize project') {
+                echo 'Hello World'
+        }
 
-            stage('Validate Build') {
-                    echo 'Hello World'
-            }
+        stage('Validate Build') {
+                echo 'Hello World'
+        }
 
-            stage('Check server start up') {
-                    echo 'Hello World'
-            }
+        stage('Check server start up') {
+                echo 'Hello World'
+        }
 
 
-            stage('Merge to main branch') {
-                    echo 'Hello World'
-            }
-            stage('Clean up') {
-                    echo 'Hello World'
-            }
+        stage('Merge to main branch') {
+                echo 'Hello World'
+        }
+        stage('Clean up') {
+                echo 'Hello World'
+        }
 }
