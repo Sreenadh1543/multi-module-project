@@ -26,9 +26,9 @@ pipeline {
 
              stage('Push framework upgraded branch to remote') {
                 steps {
-                    sh 'git add .
-                        git commit -m "Framework modernized and jars upgraded"
-                        git push'
+                    sh 'git add .'
+                    sh 'git commit -m "Framework modernized and jars upgraded"'
+                    sh 'git push'
                 }
             }
             stage('Modernize project') {
