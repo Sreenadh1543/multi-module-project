@@ -14,15 +14,24 @@ pipeline {
 
             stage('create a new branch') {
                 steps {
-                    echo 'Hello World'
+                    sh 'git branch framework_Upgrade'
                 }
             }
+
              stage('Check out new branch') {
                 steps {
-                    echo 'Hello World'
+                    sh 'git checkout framework_Upgrade'
                 }
             }
-            stage('Modernaize project') {
+
+             stage('Push framework upgraded branch to remote') {
+                steps {
+                    sh 'git add .
+                        git commit -m "Framework modernized and jars upgraded"
+                        git push'
+                }
+            }
+            stage('Modernize project') {
                 steps {
                     echo 'Hello World'
                 }
@@ -38,6 +47,8 @@ pipeline {
                     echo 'Hello World'
                 }
             }
+
+
             stage('Merge to main branch') {
                 steps {
                     echo 'Hello World'
