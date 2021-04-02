@@ -1,73 +1,59 @@
-pipeline {
+#!groovy
+node {
     agent any
      tools {
             maven 'MAVEN_HOME'
             jdk 'JAVA_HOME'
             git 'GIT_HOME'
         }
-        stages {
+
+        stage('Build project') {
+            steps {
+               sh 'mvn clean install'
+             }
+        }
 
         stage('Checkout') {
-              steps {
-                script {
-                   sh "git branch -a"
-                   sh "git checkout main"
-                  }
-               }
-            }
-
-            stage('Build project') {
-                steps {
-                   sh 'mvn clean install'
-                 }
-            }
+            script {
+               withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GITHUB_PERSONAL',
+               usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                       bat git config --get remote.origin.url
+                       bat git config --global user.name "sreenadh1543"
+                       bat git config --global user.email "sreenadh1543@gmail.com"
+              }
+        }
 
             stage('create a new branch') {
-                steps {
-                    sh '#!/bin/bash git branch framework_Upgrade'
-                }
+                  bat 'git branch framework_Upgrade'
             }
 
              stage('Check out new branch') {
-                steps {
-                    sh 'git checkout framework_Upgrade'
-                }
-            }
+                  bat 'git checkout framework_Upgrade'
+             }
 
              stage('Push framework upgraded branch to remote') {
-                steps {
-                    sh 'git add .'
-                    sh 'git commit -m "Framework modernized and jars upgraded"'
-                    sh 'git push'
-                }
+                bat 'git add .'
+                bat 'git commit -m "Framework modernized and jars upgraded"'
+                bat 'git push'
             }
+
             stage('Modernize project') {
-                steps {
                     echo 'Hello World'
-                }
             }
+
             stage('Validate Build') {
-                steps {
                     echo 'Hello World'
-                }
             }
 
             stage('Check server start up') {
-                steps {
                     echo 'Hello World'
-                }
             }
 
 
             stage('Merge to main branch') {
-                steps {
                     echo 'Hello World'
-                }
             }
             stage('Clean up') {
-                steps {
                     echo 'Hello World'
-                }
             }
-        }
 }
