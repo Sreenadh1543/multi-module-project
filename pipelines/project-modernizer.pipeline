@@ -3,8 +3,18 @@ pipeline {
      tools {
             maven 'MAVEN_HOME'
             jdk 'JAVA_HOME'
+            git 'GIT_HOME'
         }
         stages {
+
+        stage('Checkout') {
+              steps {
+                script {
+                   sh "git branch -a"
+                   sh "git checkout main"
+                  }
+               }
+            }
 
             stage('Build project') {
                 steps {
@@ -14,7 +24,7 @@ pipeline {
 
             stage('create a new branch') {
                 steps {
-                    sh 'git branch framework_Upgrade'
+                    sh '#!/bin/bash git branch framework_Upgrade'
                 }
             }
 
