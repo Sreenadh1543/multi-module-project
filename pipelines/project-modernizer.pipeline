@@ -49,3 +49,5 @@ node("master") {
                 echo 'Hello World'
         }
 }
+
+}
