@@ -1,4 +1,4 @@
-//
+// Average vulnerability approvals
 method groovy.lang.GroovyObject getProperty java.lang.String
 method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object
 method groovy.util.XmlSlurper parse java.io.File
@@ -26,7 +26,7 @@ staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods print groovy.lang.
 staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods println groovy.lang.Closure java.lang.Object
 
 
-//
+// Critical access
 
 method groovy.lang.GroovyObject getProperty java.lang.String
 method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object
