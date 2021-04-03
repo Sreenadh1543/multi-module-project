@@ -18,7 +18,6 @@ def propertyUpgradeMap = [
 def pluginUpgradeMap = [
         'maven-surefire-plugin': '2.22.0',
         'maven-dependency-plugin': '3.1.1',
-        'jetty-maven-plugin': '10.0.1',
         'maven-war-plugin': '3.3.1'
 
 ];
@@ -43,7 +42,7 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
     rootDirectory.eachFileRecurse {
         if(it.name.endsWith("pom.xml")){
             createBackupPom(it)
-            def pom = new XmlSlurper().parse(it)
+            def pom = new XmlSlurper(false, false).parse(it)
                 print "update versions in properties "
                 pom.properties.childNodes().each{
                     if(propertyUpgradeMap.containsKey(it.name()))
@@ -64,8 +63,11 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
 
             print "Writing new pom.xml "
             def outputBuilder = new StreamingMarkupBuilder()
+            String result = outputBuilder.bind{
+                mkp.yield pom
+            }
             def writer = it.newWriter()
-            writer << XmlUtil.serialize(pom)
+            writer << XmlUtil.serialize(result)
             writer.close()
             println "OK"
             println "Release Script End -----"
