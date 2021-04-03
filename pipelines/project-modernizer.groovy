@@ -67,7 +67,13 @@ node("master") {
     stage('Push framework upgraded branch to remote') {
         bat 'git add .'
         bat 'git commit -m "Framework modernized and jars upgraded"'
-        bat 'git push --set-upstream origin framework_Upgrade'
+        withCredentials([usernamePassword(credentialsId: 'GITHUB_PERSONAL',
+                usernameVariable: 'Username', passwordVariable: 'Password')]) {
+            script {
+                env.encodedPass = URLEncoder.encode(Password, "UTF-8")
+            }
+            bat 'git push --set-upstream origin framework_Upgrade'
+        }
     }
 
     stage('Validate Build') {
