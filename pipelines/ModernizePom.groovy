@@ -72,7 +72,7 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
             println "OK"
             println "Release Script End -----"
 
-            //deleteBackupPom(it)
+            deleteBackupPom(it)
         }
     }
 
