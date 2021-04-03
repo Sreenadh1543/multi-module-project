@@ -1,0 +1,36 @@
+//
+method groovy.lang.GroovyObject getProperty java.lang.String
+method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object
+method groovy.util.XmlSlurper parse java.io.File
+method groovy.util.slurpersupport.GPathResult childNodes
+method groovy.util.slurpersupport.GPathResult replaceBody java.lang.Object
+method groovy.util.slurpersupport.GPathResult text
+method groovy.util.slurpersupport.Node name
+method groovy.util.slurpersupport.Node replaceBody java.lang.Object
+method groovy.xml.StreamingMarkupBuilder bind java.lang.Object
+method java.io.File getName
+method java.io.File toPath
+new groovy.util.XmlSlurper boolean boolean
+new groovy.xml.StreamingMarkupBuilder
+new java.io.File java.lang.String
+staticField java.nio.file.StandardCopyOption REPLACE_EXISTING
+staticMethod groovy.xml.XmlUtil serialize java.lang.String
+staticMethod java.nio.file.Files copy java.nio.file.Path java.nio.file.Path java.nio.file.CopyOption[]
+staticMethod java.nio.file.Files delete java.nio.file.Path
+staticMethod java.nio.file.Paths get java.lang.String java.lang.String[]
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods eachFileRecurse java.io.File groovy.lang.Closure
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods execute java.lang.String
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getProperties java.lang.Object
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods newWriter java.io.File
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods print groovy.lang.Closure java.lang.Object
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods println groovy.lang.Closure java.lang.Object
+
+
+//
+
+method groovy.lang.GroovyObject getProperty java.lang.String
+method groovy.lang.GroovyObject invokeMethod java.lang.String java.lang.Object
+new java.io.File java.lang.String
+staticMethod java.nio.file.Paths get java.lang.String java.lang.String[]
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods execute java.lang.String
+staticMethod org.codehaus.groovy.runtime.DefaultGroovyMethods getProperties java.lang.Object
