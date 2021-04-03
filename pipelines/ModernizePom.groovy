@@ -1,4 +1,3 @@
-
 import groovy.xml.StreamingMarkupBuilder
 import groovy.xml.XmlSlurper
 import groovy.xml.XmlUtil
@@ -40,7 +39,7 @@ def dependenciesUpgradeMap = [
 
 def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginUpgradeMap){
     println "----- Release Script Start -----"
-    File rootDirectory = new File(workspace)
+   File rootDirectory = new File(workspace)
     rootDirectory.eachFileRecurse {
         if(it.name.endsWith("pom.xml")){
             createBackupPom(it)
@@ -65,10 +64,6 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
 
             print "Writing new pom.xml "
             def outputBuilder = new StreamingMarkupBuilder()
-            String result = outputBuilder.bind{
-                mkp.declareNamespace("":  "http://maven.apache.org/POM/4.0.0")
-                mkp.yield pom
-            }
             def writer = it.newWriter()
             writer << XmlUtil.serialize(pom)
             writer.close()
