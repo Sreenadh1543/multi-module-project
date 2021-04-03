@@ -35,12 +35,6 @@ node("master") {
 
     ];
 
-    stage('Clean up Directory') {
-        bat 'git clean -fdx'
-        step([$class: 'WsCleanup'])
-        checkout scm
-    }
-
     stage('Build project') {
         checkout scm
         bat 'mvn clean install'
@@ -76,12 +70,29 @@ node("master") {
         }
     }
 
-    stage('Validate Build') {
-        echo 'Hello World'
+    stage('Validate Build And start server') {
+        /*
+        dir("$workspace/web") {
+            bat 'mvn jetty:run'
+        }
+        dir("$workspace") {
+            echo 'directory switched to main'
+        }
+        */
     }
 
     stage('Check server start up') {
-        echo 'Hello World'
+        /*
+        script {
+            def logContent = Jenkins.getInstance()
+                    .getItemByFullName(env.JOB_NAME)
+                    .getBuildByNumber(
+                            Integer.parseInt(env.BUILD_NUMBER))
+                    .logFile.text
+            // copy the log in the job's own workspace
+            writeFile file: "buildlog.txt", text: logContent
+        }
+        */
     }
 
     stage('Merge to main branch') {
@@ -103,25 +114,25 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
         if(it.name.endsWith("pom.xml")){
             createBackupPom(it)
             def pom = new XmlSlurper(false, false).parse(it)
-            print "update versions in properties "
+            //print "update versions in properties "
             pom.properties.childNodes().each{
                 if(propertyUpgradeMap.containsKey(it.name()))
                     it.replaceBody(propertyUpgradeMap.get(it.name()))
             }
 
-            print "updating versions in dependencies "
+            //print "updating versions in dependencies "
             pom.dependencies.dependency.each{
                 if(dependenciesUpgradeMap.containsKey(it.artifactId.text()))
                     it.version.replaceBody(dependenciesUpgradeMap.get(it.artifactId.text()))
             }
 
-            print "updating plugins in dependencies "
+            //print "updating plugins in dependencies "
             pom.build.plugins.plugin.each{
                 if(pluginUpgradeMap.containsKey(it.artifactId.text()))
                     it.version.replaceBody(pluginUpgradeMap.get(it.artifactId.text()))
             }
 
-            print "Writing new pom.xml "
+            //print "Writing new pom.xml "
             def outputBuilder = new StreamingMarkupBuilder()
             String result = outputBuilder.bind{
                 mkp.yield pom
@@ -140,12 +151,12 @@ def projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginU
 
 @NonCPS
 def createBackupPom(file){
-    println "A copy of the old pom for processing"
+    //println "A copy of the old pom for processing"
     copy(file.toPath(), get(file.toString().replaceAll("pom.xml",""),'pom.backup.xml') ,StandardCopyOption.REPLACE_EXISTING)
 }
 
 @NonCPS
 def deleteBackupPom(file){
-    println "Back up pom is deleted at every module"
+    //println "Back up pom is deleted at every module"
     delete(get(file.toString().replaceAll("pom.xml",""),'pom.backup.xml'))
 }
