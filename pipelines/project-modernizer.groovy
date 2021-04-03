@@ -64,8 +64,6 @@ node("master") {
         projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginUpgradeMap)
     }
 
-
-
     stage('Push framework upgraded branch to remote') {
         bat 'git add .'
         bat 'git commit -m "Framework modernized and jars upgraded"'
