@@ -58,6 +58,10 @@ node("master") {
         projectTraversal(workspace,propertyUpgradeMap,dependenciesUpgradeMap,pluginUpgradeMap)
     }
 
+    stage('Validate Build') {
+        bat 'mvn clean install'
+    }
+
     stage('Push framework upgraded branch to remote') {
         bat 'git add .'
         bat 'git commit -m "Framework modernized and jars upgraded"'
@@ -91,12 +95,12 @@ node("master") {
                     .logFile.text
             // copy the log in the job's own workspace
             writeFile file: "buildlog.txt", text: logContent
-        }
-        */
+        }*/
+
     }
 
     stage('Merge to main branch') {
-        echo 'Hello World'
+        //echo 'Hello World'
     }
 
     stage('Clean up Directory') {
